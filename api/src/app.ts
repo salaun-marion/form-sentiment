@@ -7,26 +7,28 @@ import { giveSentiment } from './sentiment';
 const app = express();
 const port = 3000;
 
+//to parse JSON body
+app.use(express.json());
+
 app.get('/admin/comments', async (req, res) => {
   const comments = await BSD.comments.find().toArray();
   res.json(comments);
 });
 
 app.post('/user/comment', async (req, res) => {
-  const comments = await BSD.comments.find().toArray();
+  const comments = await BSD.comments.insertOne(
+    new Comment(
+      req.body.username,
+      req.body.text,
+      await giveSentiment(req.body.text)
+    )
+  );
   res.json(comments);
 });
 
 async function main() {
   try {
-    await BSD.comments.drop();
-
-    const text1 = 'Dont like it';
-    const text2 = 'Love it';
-
-    await BSD.comments.insertOne(
-      new Comment('user35678', text1, await giveSentiment(text1))
-    );
+    // await BSD.comments.drop();
     app.listen(port, () => {
       return console.log(`🚀 Express is listening at http://localhost:${port}`);
     });

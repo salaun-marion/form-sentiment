@@ -18,23 +18,20 @@ const comment_1 = __importDefault(require("./models/comment"));
 const sentiment_1 = require("./sentiment");
 const app = (0, express_1.default)();
 const port = 3000;
+app.use(express_1.default.json());
 app.get('/admin/comments', (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     const comments = yield database_1.BSD.comments.find().toArray();
+    res.json(comments);
+}));
+app.post('/user/comment', (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    console.log('req.body', req.body);
+    const comments = yield database_1.BSD.comments.insertOne(new comment_1.default(req.body.username, req.body.text, yield (0, sentiment_1.giveSentiment)(req.body.text)));
     res.json(comments);
 }));
 function main() {
     return __awaiter(this, void 0, void 0, function* () {
         try {
             yield database_1.BSD.comments.drop();
-            const text1 = 'Dont like it';
-            const text2 = 'Love it';
-            console.log('PRETEST');
-            yield (0, sentiment_1.giveSentiment)(text1);
-            console.log('TEST');
-            yield database_1.BSD.comments.insertMany([
-                new comment_1.default('user35678', text1, yield (0, sentiment_1.giveSentiment)(text1)),
-                new comment_1.default('user456', text2, yield (0, sentiment_1.giveSentiment)(text2)),
-            ]);
             app.listen(port, () => {
                 return console.log(`🚀 Express is listening at http://localhost:${port}`);
             });
