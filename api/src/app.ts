@@ -1,14 +1,16 @@
 import express from 'express';
+import cors from 'cors';
 
 import { BSD } from './database';
 import Comment from './models/comment';
 import { giveSentiment } from './sentiment';
 
 const app = express();
-const port = 3000;
+const port = 3500;
 
 //to parse JSON body
 app.use(express.json());
+app.use(cors({ origin: '*', credentials: true })); // TODO: change origin to be more specific
 
 app.get('/admin/comments', async (req, res) => {
   const comments = await BSD.comments.find().toArray();
@@ -16,6 +18,7 @@ app.get('/admin/comments', async (req, res) => {
 });
 
 app.post('/user/comment', async (req, res) => {
+  //TODO : check if req.body exist
   const comments = await BSD.comments.insertOne(
     new Comment(
       req.body.username,
