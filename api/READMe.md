@@ -2,3 +2,5 @@
 
 1. to transpile `npx tsc`
 2. to launch the server `node dist/app.js`
+
+or `npx tsc && node dist/app.js`
