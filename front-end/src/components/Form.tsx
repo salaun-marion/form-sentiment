@@ -1,16 +1,21 @@
 import { useFormStatus } from 'react-dom';
 import { submitForm } from '../actions/submitForm';
+import Image from '../images/ironing-shirt.jpg';
+import '../styles/Form.css';
 
 export default function OpinionForm() {
   return (
-    <div>
+    <div className="card-container">
       <form action={submitForm}>
-        <h3>Evaluate your pizza</h3>
-        <label>Username : </label>
+        <img src={Image} alt="blog post" />
+        <h3>Evaluate our ironing service</h3>
+        <label>Username </label>
+        <br />
         <input type="text" name="username" />
         <br />
-        <label>Your comment : </label>
-        <input type="text" name="opinion" maxLength={1000} />
+        <label>Your comment </label>
+        <br />
+        <textarea name="opinion" maxLength={1000} />
         <br />
         <SubmitButton />
       </form>
