@@ -23,7 +23,7 @@ app.post('/user/comment', async (req, res) => {
     new Comment(
       req.body.username,
       req.body.text,
-      await giveSentiment(req.body.text)
+      await giveSentiment(req.body.text || '')
     )
   );
   res.json(comments);
