@@ -7,11 +7,10 @@ For the front-end, once you are in the directory (`cd front-end`), do `npm i`.
 
 ## Launch the program
 
-Open one terminal for the api : 
+Open one terminal for the api :
 
 Execute `npx tsc && node dist/app.js`
 It will launch the express server on localhost:3500
-
 
 For the front-end app
 
@@ -20,6 +19,7 @@ It will launch it on localhost:3000
 
 Then enjoy !
 
-## Launch the tests for the front-end
+## Launch the tests 
 
-`npm run test` in the front-end directory
+API : `npx jest` in the api directory.
+Front-end : `npm run test` in the front-end directory and then press `a` if necessary.
