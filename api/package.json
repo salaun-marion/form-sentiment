@@ -16,6 +16,7 @@
   "dependencies": {
     "@google-cloud/language": "^6.5.0",
     "cors": "^2.8.5",
+    "dotenv": "^16.4.7",
     "express": "^4.17.1",
     "mongodb": "^6.11.0"
   }
