@@ -2,6 +2,14 @@
 
 ## Installation
 
+Prerequisite :
+
+- React : v19
+- Node : v23
+- Typescript v5.7.2
+- MongoDB : v6.11.0
+- Express : v4.17.1
+
 For the api, once you are in the directory (`cd api`), do `npm i`.
 For the front-end, once you are in the directory (`cd front-end`), do `npm i`.
 
