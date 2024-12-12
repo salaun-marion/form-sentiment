@@ -6,16 +6,25 @@ import '../styles/Form.css';
 export default function OpinionForm() {
   return (
     <div className="card-container">
-      <form action={submitForm}>
+      <form data-testid="form " action={submitForm}>
         <img src={Image} alt="blog post" />
         <h3>Evaluate our ironing service</h3>
         <label>Username </label>
         <br />
-        <input type="text" name="username" />
+        <input
+          data-testid="input-username"
+          type="text"
+          name="username"
+          maxLength={30}
+        />
         <br />
         <label>Your comment </label>
         <br />
-        <textarea name="opinion" maxLength={1000} />
+        <textarea
+          data-testid="textarea-comment"
+          name="opinion"
+          maxLength={1000}
+        />
         <br />
         <SubmitButton />
       </form>
@@ -24,11 +33,11 @@ export default function OpinionForm() {
 }
 
 function SubmitButton() {
-  const data = useFormStatus();
+  const { pending } = useFormStatus();
 
   return (
-    <button type="submit" disabled={data.pending}>
-      {data.pending ? 'Loading...' : 'Add'}
+    <button type="submit" disabled={pending} aria-label="button">
+      {pending ? 'Loading...' : 'Add'}
     </button>
   );
 }

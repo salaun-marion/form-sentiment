@@ -9,6 +9,7 @@ export class BSD {
     'mongodb+srv://marionsl:1zASYZAgg2C8VSrl@cluster0.x1fo0.mongodb.net/'
   );
 
+  //TODO: change the name of the database
   static readonly database = this.client.db('bsd');
   static readonly comments = this.database.collection<Comment>(this.COMMENTS);
 }

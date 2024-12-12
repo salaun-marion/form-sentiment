@@ -7,7 +7,7 @@ export const useFetch = (options: any) => {
     fetch(options.url)
       .then((response) => response.json())
       .then((json) => setData(json));
-  }, [data, options.url]);
+  }, [options.url]);
 
   return { data };
 };

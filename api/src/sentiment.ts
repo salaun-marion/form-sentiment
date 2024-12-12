@@ -1,5 +1,6 @@
 export async function giveSentiment(text: string) {
   const language = require('@google-cloud/language');
+  //TODO : APIKEY
   const client = new language.LanguageServiceClient();
   const document = {
     content: text,
