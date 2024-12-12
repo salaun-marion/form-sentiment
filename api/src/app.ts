@@ -10,9 +10,8 @@ const database = new BSD();
 const app = express();
 const port = 3500;
 
-//to parse JSON body
 app.use(express.json());
-app.use(cors({ origin: '*', credentials: true })); // TODO: change origin to be more specific
+app.use(cors({ origin: '*', credentials: true })); // Origin set * for demo purposes
 
 app.get('/admin/comments', async (req, res) => {
   const comments = await database.comments.find().toArray();
@@ -20,19 +19,27 @@ app.get('/admin/comments', async (req, res) => {
 });
 
 app.post('/user/comment', async (req, res) => {
-  //TODO : check if req.body exist
+  if (!req.body.username) {
+    res.status(400).send({ error: 'username missing' });
+    return;
+  }
+  if (!req.body.text) {
+    res.status(400).send({ error: 'comment missing' });
+    return;
+  }
   const comments = await database.comments.insertOne(
     new Comment(
       req.body.username,
       req.body.text,
-      await giveSentiment(req.body.text || '')
+      await giveSentiment(req.body.text)
     )
   );
-  res.json(comments);
+  res.json(comments).status(200);
 });
 
 async function main() {
   try {
+    // HINT: to drop the database, please uncomment next line for demo purposes
     // await database.comments.drop();
     app.listen(port, () => {
       return console.log(`🚀 Express is listening at http://localhost:${port}`);

@@ -7,7 +7,7 @@ export const submitForm = async (data: FormData) => {
       method: 'POST',
       body: JSON.stringify({
         username,
-        text: opinion, //TODO: change text by opinion in api
+        text: opinion,
       }),
       headers: {
         'Content-type': 'application/json; charset=UTF-8',
