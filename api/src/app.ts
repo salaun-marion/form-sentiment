@@ -9,6 +9,10 @@ require('dotenv').config();
 const database = new BSD();
 const app = express();
 const port = 3500;
+const language = require('@google-cloud/language');
+const client = new language.LanguageServiceClient({
+  apiKey: process.env.API_KEY_NATURAL_LANGUAGE,
+});
 
 app.use(express.json());
 app.use(cors({ origin: '*', credentials: true })); // Origin set * for demo purposes
@@ -31,7 +35,7 @@ app.post('/user/comment', async (req, res) => {
     new Comment(
       req.body.username,
       req.body.text,
-      await giveSentiment(req.body.text)
+      await giveSentiment(req.body.text, client)
     )
   );
   res.json(comments).status(200);

@@ -24,21 +24,17 @@ function Emoji(sentiment: number) {
 }
 
 export default function Comments({ comments }: { comments: Comment[] }) {
-  //TODO: fix key
   return (
-    <div className="card-container" style={{ width: '500px' }}>
+    <div className="comments-container card-container">
       <h3>List of comments</h3>
 
       {comments.map((comment: Comment, index) => (
-        <>
-          <li key={index}>
-            {Emoji(comment.sentiment)}
-            <em> {comment.username} </em>({comment.sentiment.toFixed(2)})
-            <br></br>
-            {comment.text}
-          </li>
+        <li key={index}>
+          {Emoji(comment.sentiment)}
+          <em> {comment.username} </em>({comment.sentiment.toFixed(2)})<br></br>
+          {comment.text}
           <br></br>
-        </>
+        </li>
       ))}
     </div>
   );

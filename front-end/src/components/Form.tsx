@@ -11,12 +11,7 @@ export default function OpinionForm() {
         <h3>Evaluate our ironing service</h3>
         <label>Username </label>
         <br />
-        <input
-          data-testid="input-username"
-          type="text"
-          name="username"
-          maxLength={30}
-        />
+        <input type="text" name="username" maxLength={30} />
         <br />
         <label>Your comment </label>
         <br />
@@ -36,7 +31,7 @@ function SubmitButton() {
   const { pending } = useFormStatus();
 
   return (
-    <button type="submit" disabled={pending} aria-label="button">
+    <button type="submit" disabled={pending}>
       {pending ? 'Loading...' : 'Add'}
     </button>
   );
